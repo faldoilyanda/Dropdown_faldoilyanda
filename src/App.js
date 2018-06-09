@@ -4,95 +4,72 @@ import './App.css';
 
 class App extends Component {
   state = {
-    awal:'',
-    poin:'',
-    poin2:'',
-    poin3:'',
-    poin4:'',
-    terpilihtingkat:'Pilih tingkat',
-    terpilihjenjang:'Pilih jenjang'
-    };
-  
-  pertama =() =>{     
-    this.setState({
-      terpilihtingkat:'Pendidikan Pra Sekolah' ,
-      awal:'Jenjang Pendidikan Pra Sekolah',
-      poin:'PAUD (Pendidikan Anak Usia Dini)',
-      poin2:'TK (Taman Kanak-kanak)',
-      poin3:'RA (Raudhatul Athfal)',
-    });   
+    jenjang: '⇡',
+    tingkatan: [],
+    Pradasar :['PAUD (PENDIDIKAN ANAK USIA DINI)','TK (TAMAN KANAK-KANAK )','RA (RAUDATUL ATHFAL)'],
+    Dasar : ['SD (SEKOALH DASAR)','MI (MADRASAH IBTIDAYAH)','SMP (SEKOLAH MENENGAH PERTAMA)','MTs'],
+    Menengah : ['SMA (SEKOLAH MENENGAH ATAS)', 'MA ( MADRASAH ALIYAH)','SMK(SEKOLAH MENENGAH KEJURUAN)'],
+    Tinggi : ['D3 DIPLOMA','S1/D4 SARJANA' ,'S2 MAGISTER','S3 DOKTORAL']
   }
-
-  kedua =() =>{     
-    this.setState({
-      terpilihtingkat:'Pendidikan Dasar' ,
-      awal:'Jenjang Pendidikan Dasar',
-      poin:'SD (Sekolah Dasar )',
-      poin2:'MI (Madrasah Ibtidaiyah)',
-      poin3:'SMP (Sekolah Menegah Pertama)',
-      poin4:'MTs (Madrasah Tsanawiyah)',
-    });   
+  praSekolah(){
+    this.setState({tingkatan:this.state.Pradasar})
+    this.setState({jenjang:'PENDIDIKAN PRA SEKOLAH'})
   }
-
-  ketiga =() =>{     
-    this.setState({
-      terpilihtingkat:'Pendidikan Menengah' ,
-      awal:'Jenjang Pendidikan Menengah',
-      poin:'SMA (Sekolah Menegah Atas)',
-      poin2:'MA (Madrasah Aliyah)',
-      poin3:'SMK (Sekolah Menengah Kejuruan)',
-    });   
+  pendidikanDasar(){
+    this.setState({tingkatan:this.state.Dasar})
+    this.setState({jenjang:'PENDIDIKAN DASAR'})
   }
-
-  keempat =() =>{     
-    this.setState({
-      terpilihtingkat:'Pendidikan Tinggi' ,
-      awal:'Jenjang Pendidikan Tinggi',
-      poin:'D3 Diploma',
-      poin2:'S1/D4 Sarjana',
-      poin3:'S3 Doktoral',
-    });   
+  pendidikanMenengah(){
+    this.setState({tingkatan:this.state.Menengah})
+    this.setState({jenjang:'PENDIDIKAN MENENGAH'})
   }
-
+  pendidikanTinggi(){
+    this.setState({tingkatan:this.state.Tinggi})
+    this.setState({jenjang:'PENDIDIKAN TINGGI'})
+  }
   render() {
-
+    var daftarTingkatan = this.state.tingkatan.map((tingkat,index) => {
+        return <li style={{textAlign: 'left',color:'black', textDecoration:'none'}}> 
+                  <a>{tingkat}</a>
+              </li>
+      }
+    )
     return (
-      <div>
-<center>
-  <h1 style={{fontSize:"30px",fontWeight:"bold",marginTop:"20px"}}>JENJANG PENDIDIKAN</h1>
- <div className="container" style={{marginTop:"20px"}}>
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-     style={{width: "300px"}}>
-     
-     <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span> {this.state.terpilihtingkat}
-     
-     </button>
-    <div class="dropdown-menu">
-        <a className="dropdown-item" onClick= {this.pertama}>Pendidikan Pra Sekolah</a>
-        <br/>
-        <a className="dropdown-item" onClick= {this.kedua} >Pendidikan Dasar</a>
-        <br/>
-        <a className="dropdown-item" onClick= {this.ketiga} >Pendidikan Menegah</a>
-        <br/>
-        <a className="dropdown-item" onClick= {this.keempat} >Pendidikan Tinggi</a>
-    </div>
-  </div>
-  </div>
+      <div className="App">
+
+      
+      <h2 style={{fontSize:"30px",fontWeight:"bold",marginTop:"20px"}}>
+      CLICK JENJANG PENDIDIKAN ⇓
+      
+      </h2>
        
-       <br/><br/><br/>
-       { this.state.poin == '' ? 
-         <h5>{this.state.awal}</h5> :
-         <div>
-            <u><h5>{this.state.awal}</h5></u>
-            <p>{this.state.poin}</p>
-            <p>{this.state.poin2}</p>
-            <p>{this.state.poin3}</p>
-            <p>{this.state.poin4}</p> 
+        <div className="App-intro" style={{marginTop: '20px'}}>
+          <div className="btn-group">
+            <a href="#" className="btn btn-default">PILIH JENJANG</a>
+            <a href="#" className="btn btn-default dropdown-toggle" data-toggle="dropdown"><span className="caret" /></a>
+            <ul className="dropdown-menu">
+            <li><a href="#" onClick={()=> {this.praSekolah();}}>PENDIDIKAN PRA SEKOLAH</a></li>
+              <li><a href="#" onClick={()=> {this.pendidikanDasar();}}>PENDIDIKAN DASAR</a></li>
+              <li><a href="#" onClick={()=> {this.pendidikanMenengah();}}>PENDIDIKAN MENENGAH</a></li>
+              <li><a href="#" onClick={()=>{this.pendidikanTinggi();}}>PENDIDIKAN TINGKAT</a></li>
+            </ul>
           </div>
-        }
-    </center>
-    </div>
+          <div className="container">
+            <div className="col-md-4 col-md-offset-4" style={{marginTop: '20px'}}>
+              <div className="panel panel-default">
+                <div className="panel-heading">
+                  <h4 style={{color: 'black',textDecoration:'none', fontSize:'16px'}}>{this.state.jenjang}</h4>
+                </div>
+                <div className="panel-body">
+                  <ul className="pull-left">
+                    {daftarTingkatan}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+      </div>
     );
   }
 }
